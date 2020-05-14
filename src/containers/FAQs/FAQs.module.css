@@ -1,0 +1,18 @@
+.FAQs {
+  padding: 20px;
+  background: var(--light-color);
+  color: #333;
+}
+
+.FAQs h2 {
+  text-align: center;
+}
+
+.MoreQuestions {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 2rem;
+}
+.Answer a:hover {
+  color: #b16416;
+}

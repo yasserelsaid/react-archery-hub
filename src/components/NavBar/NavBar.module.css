@@ -1,0 +1,36 @@
+.NavBar .Container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0 1rem;
+}
+
+.NavBar .Logo {
+  height: 70px;
+}
+
+.Trans {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  /* position: sticky; */
+  top: 0;
+  backdrop-filter: blur(5px);
+  color: #fff;
+}
+.Trans a {
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .NavBar .Container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .NavBar .Logo {
+    height: 70px;
+    display: block;
+    margin: auto;
+  }
+}

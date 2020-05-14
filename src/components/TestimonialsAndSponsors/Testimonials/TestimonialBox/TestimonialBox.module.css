@@ -1,0 +1,37 @@
+.Testimonial {
+  display: flex;
+  align-items: center;
+  height: 10.5rem;
+}
+
+.Testimonial .TestimonialImg {
+  flex: 1;
+  padding-right: 1rem;
+}
+.Testimonial img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.Testimonial .TestimonialTxt {
+  flex: 3;
+}
+
+.Box {
+  padding: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.Dark {
+  background: #212121;
+  border: #777 solid 1px;
+  color: var(--light-color);
+}
+
+@media screen and (max-width: 768px) {
+  .Testimonial {
+    height: auto;
+  }
+}

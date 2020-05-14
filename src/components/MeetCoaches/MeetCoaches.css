@@ -1,0 +1,55 @@
+#coaches h2 {
+  color: #fff;
+  overflow: hidden;
+}
+
+#coaches .carousel-container {
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+}
+
+#coaches .carousel-container .carousel-slide {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+#coaches .carousel-slide img {
+  width: 33.3%;
+}
+
+.arrows {
+  position: relative;
+}
+
+#prevbtn,
+#nextbtn {
+  position: absolute;
+  top: 47%;
+  z-index: 1;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+#prevbtn:hover,
+#nextbtn:hover {
+  color: #97510b;
+}
+#prevbtn {
+  left: 3%;
+}
+#nextbtn {
+  right: 3%;
+}
+@media screen and (max-width: 768px) {
+  #coaches .carousel-slide img {
+    width: 100%;
+  }
+
+  #prevbtn,
+  #nextbtn {
+    font-size: 1rem;
+  }
+}

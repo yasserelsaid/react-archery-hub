@@ -1,0 +1,68 @@
+/* FormGroupAnimated for name and email */
+.FormGroupAnimated {
+  position: relative;
+  height: 55px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.FormGroupAnimated input {
+  font-size: inherit;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  height: 100%;
+  padding-top: 20px;
+  border: none;
+  outline: none;
+  background-color: var(--light-color);
+}
+
+/* to make the background of the input field the same color as the bg when using chrome auto-fill */
+
+.FormGroupAnimated input:-webkit-autofill,
+.FormGroupAnimated input:-webkit-autofill:hover,
+.FormGroupAnimated input:-webkit-autofill:focus,
+.FormGroupAnimated input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--light-color) inset !important;
+}
+
+.FormGroupAnimated .LabelName {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid #aaa;
+  pointer-events: none;
+}
+
+.LabelName::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 100%;
+  width: 100%;
+  border-bottom: #d48b2c 3px solid;
+  transform: translateX(-100%);
+  transition: all 0.5s ease;
+}
+
+.LabelName .ContentName {
+  position: absolute;
+  bottom: 5px;
+  left: 0px;
+  transition: all 0.4s ease;
+}
+
+.FormGroupAnimated input:focus + .LabelName .ContentName,
+.FormGroupAnimated input:not(:placeholder-shown) + .LabelName .ContentName {
+  transform: translateY(-150%);
+  font-size: 0.9rem;
+  color: var(--primary-color);
+}
+
+.FormGroupAnimated input:focus + .LabelName::after,
+.FormGroupAnimated input:not(:placeholder-shown) + .LabelName::after {
+  transform: translateX(0%);
+}

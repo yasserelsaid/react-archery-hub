@@ -1,0 +1,34 @@
+.Location img {
+  width: 80px;
+}
+
+.LocationInfo {
+  padding-bottom: 2rem;
+}
+
+.Location {
+  padding: 2rem;
+}
+.Location:first-child {
+  border-bottom: 1px #bbb dotted;
+}
+.MapAndImage {
+  display: flex;
+}
+.ImgNxtMap {
+  align-self: flex-end;
+}
+
+.MapAndImage img {
+  flex: 1;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .MapAndImage {
+    height: 40vh;
+  }
+  img.ImgNxtMap {
+    display: none;
+  }
+}

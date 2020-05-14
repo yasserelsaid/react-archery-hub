@@ -1,0 +1,31 @@
+.VVM {
+  background: var(--light-color);
+  color: #333;
+}
+
+.VVM .Container {
+  display: flex;
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 0.64rem;
+}
+
+.VVM div {
+  padding: 0.5rem;
+}
+
+.VVM img {
+  width: 100%;
+  border-radius: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .VVM .Container {
+    display: block;
+  }
+  .VVM img {
+    width: 80%;
+    display: block;
+    margin: auto;
+  }
+}

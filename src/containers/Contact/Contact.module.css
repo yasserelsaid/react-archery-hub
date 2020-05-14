@@ -1,0 +1,8 @@
+.ContactForm {
+  padding: 4rem 1.5rem;
+  background: var(--light-color);
+  color: #333;
+}
+.ContactForm p {
+  padding-bottom: 1rem;
+}

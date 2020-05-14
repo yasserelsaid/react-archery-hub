@@ -1,0 +1,10 @@
+.ContactInfo {
+  display: flex;
+  background: var(--light-color);
+  color: #333;
+}
+@media screen and (max-width: 768px) {
+  .ContactInfo {
+    display: block;
+  }
+}

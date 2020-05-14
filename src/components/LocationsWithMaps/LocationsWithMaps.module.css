@@ -1,0 +1,6 @@
+.LocationsWithMaps {
+  padding: 2rem 1rem;
+  border-bottom: #bbb 1px dotted;
+  background: var(--light-color);
+  color: #333;
+}

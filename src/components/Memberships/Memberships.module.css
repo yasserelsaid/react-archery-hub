@@ -1,0 +1,16 @@
+.MembershipsFull {
+  padding: 2rem 1rem;
+  border-bottom: #bbb 1px dotted;
+  background: var(--light-color);
+  color: #333;
+}
+.Memberships {
+  display: flex;
+  padding-top: 2rem;
+}
+@media screen and (max-width: 768px) {
+  .Memberships {
+    display: block;
+    padding: 1rem;
+  }
+}

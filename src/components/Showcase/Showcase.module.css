@@ -1,0 +1,28 @@
+.Showcase {
+  background: url('../../assets/images/jake.jpg') no-repeat center left/cover;
+  margin-top: -76px;
+  height: 100vh;
+}
+
+.ShowcaseContent {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  color: var(--light-color);
+  height: 100%;
+  width: 100%;
+  padding: 0 2rem;
+
+  /* overlay */
+
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+  .Showcase {
+    margin-top: -160px;
+  }
+}

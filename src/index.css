@@ -1,13 +1,115 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Main Styling */
+
+:root {
+  --primary-color: #d17b24;
+  --light-color: #f4f4f4;
+}
+
+html,
+body {
+  font-family: 'Exo', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+p {
+  margin: 0.8rem 0;
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 0.64rem;
+}
+
+.btn {
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  background: var(--primary-color);
+  border-radius: 10px;
+  color: var(--light-color);
+  padding: 0.75rem 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background: #97510b;
+}
+
+.primary-text-light {
+  color: rgb(230, 140, 23);
+}
+
+.primary-text-dark {
+  color: var(--primary-color);
+}
+
+.l-heading {
+  font-size: 3.75rem;
+}
+
+.l-heading-2 {
+  font-size: 2.3rem;
+}
+
+.l-heading-3 {
+  font-size: 30px;
+}
+
+.box {
+  padding: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.dark-box {
+  background: #212121;
+  border: #777 solid 1px;
+  color: var(--light-color);
+}
+.light-box {
+  background: #e8e8e8;
+  border: #333 1px solid;
+  color: #000;
+}
+
+.bg-light {
+  background: var(--light-color);
+  color: #333;
+}
+
+.black-bg {
+  background: #000;
+  color: var(--light-color);
+}
+
+.white-txt {
+  color: #fff;
+}
+.center-txt {
+  text-align: center;
+}
+
+.py-1 {
+  padding: 1.5rem 0;
+}
+.py-2 {
+  padding: 2rem 0;
+}
+.py-3 {
+  padding: 3rem 0;
 }

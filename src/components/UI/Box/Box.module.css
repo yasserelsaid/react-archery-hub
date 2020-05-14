@@ -1,0 +1,17 @@
+.Box {
+  padding: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+.Dark {
+  background: #212121;
+  border: #777 solid 1px;
+  color: var(--light-color);
+}
+
+.Light {
+  background: #e8e8e8;
+  border: #333 1px solid;
+  color: #000;
+}

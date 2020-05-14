@@ -1,0 +1,25 @@
+.FormGroupMessage {
+  margin-bottom: 3rem;
+}
+.FormGroupMessage input,
+.FormGroupMessage textarea {
+  font-size: inherit;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.FormGroupMessage label {
+  display: block;
+  padding-bottom: 0.5rem;
+}
+
+.FormGroupMessage textarea {
+  padding: 0.75rem;
+  width: 100%;
+  border: 1px #dddddd solid;
+  height: 200px;
+  outline: none;
+}
+
+.FormGroupMessage textarea:focus {
+  border: var(--primary-color) 1px solid;
+}

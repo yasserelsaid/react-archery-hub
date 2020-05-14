@@ -1,0 +1,43 @@
+.SchedulesFull {
+  padding: 2rem 1rem;
+  border-bottom: #bbb 1px dotted;
+  background: var(--light-color);
+  color: #333;
+}
+.Schedules {
+  display: flex;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.Schedule {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Schedules .item-1 {
+  order: 1;
+}
+.Schedules .item-2 {
+  order: 2;
+}
+.Schedules .item-3 {
+  order: 3;
+}
+
+.Schedule img {
+  width: 95%;
+  display: block;
+  margin: auto;
+  border-radius: 5px;
+}
+@media screen and (max-width: 768px) {
+  .Schedules {
+    display: block;
+  }
+  .Schedule {
+    padding: 1rem;
+  }
+}

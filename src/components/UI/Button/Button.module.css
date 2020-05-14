@@ -1,0 +1,16 @@
+.Button {
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  background: var(--primary-color);
+  border-radius: 10px;
+  color: var(--light-color);
+  padding: 0.75rem 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.Button:hover {
+  background: #97510b;
+}
