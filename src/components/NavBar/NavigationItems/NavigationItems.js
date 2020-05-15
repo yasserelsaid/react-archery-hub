@@ -15,9 +15,12 @@ const navigationItems = props => (
       <NavigationItem link='/contact' exact>
         Contact Us
       </NavigationItem>
+      <NavigationItem link='/info' exact>
+        Joining Info
+      </NavigationItem>
     </ul>
-    <Link to='/join' className={classes.Btn}>
-      JOIN NOW
+    <Link to='/book' className={classes.Btn}>
+      BOOK NOW
     </Link>
   </div>
 );

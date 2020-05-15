@@ -1,26 +1,27 @@
 .AboutInfo {
   background: var(--light-color);
   color: #333;
-  text-align: center;
 }
 .InfoContent {
   display: flex;
+  padding-bottom: 2rem;
 }
 
 .InfoLeft {
-  flex: 1;
+  flex: 4;
   text-align: left;
+  align-self: center;
 }
 .InfoRight {
-  flex: 1;
+  flex: 3;
   align-self: center;
 }
 
 .InfoRight video {
-  width: 93%;
+  width: 93.61%;
   display: block;
   margin: auto;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 @media screen and (max-width: 768px) {

@@ -20,7 +20,7 @@ const locationWithMap = props => {
     mapAndImage = (
       <Aux>
         <MyMap
-          center={{ lat: 30.0004787, lng: 31.0481126 }}
+          center={{ lat: 30.006549, lng: 31.505759 }}
           mapContainerStyle={{ flex: '2', minHeight: '100%' }}
         />{' '}
         <img className={classes.ImgNxtMap} src={props.img} alt='Archery' />

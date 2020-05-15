@@ -6,21 +6,16 @@ import GarfVideo from '../../assets/images/goofy.mp4';
 const aboutInfo = props => (
   <section className={classes.AboutInfo}>
     <div className='container'>
+      <h1 className='l-heading-2 py-2'>
+        About<span className='primary-text-dark'> Archery Hub</span>
+      </h1>
       <div className={classes.InfoContent}>
         <div className={classes.InfoLeft}>
-          <h1 className='l-heading-2 py-1'>
-            About<span className='primary-text-dark'> Archery Hub</span>
-          </h1>
-
           <Box light>
             <p>
               Archery Hub is one of a kind Archery Range that is currently
               located in #West (October) and #East (New Cairo) of Cairo.
             </p>
-          </Box>
-
-          <h1 className='l-heading-2 py-1'>Company Overview</h1>
-          <Box light>
             <p>
               After a long journey of success in Nationals, Internationals,
               African, Arab and Olympic Championships ; Our team decided to go

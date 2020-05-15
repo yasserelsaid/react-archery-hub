@@ -5,7 +5,8 @@ import Home from './containers/Home/Home';
 import About from './containers/About/About';
 import FAQs from './containers/FAQs/FAQs';
 import Contact from './containers/Contact/Contact';
-import JoinNow from './containers/JoinNow/JoinNow';
+import JoiningInfo from './containers/JoiningInfo/JoiningInfo';
+import Reserve from './containers/Reserve/Reserve';
 
 import './App.css';
 
@@ -17,7 +18,8 @@ function App(props) {
         <Route path='/about' exact component={About} />
         <Route path='/faqs' exact component={FAQs} />
         <Route path='/contact' exact component={Contact} />
-        <Route path='/join' exact component={JoinNow} />
+        <Route path='/info' exact component={JoiningInfo} />
+        <Route path='/book' exact component={Reserve} />
       </Switch>
     </div>
   );

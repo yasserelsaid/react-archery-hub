@@ -6,7 +6,7 @@ import Memberships from '../../components/Memberships/Memberships';
 import Schedules from '../../components/Schedules/Schedules';
 import Footer from '../../components/Footer/Footer';
 
-const joinNow = () => (
+const joiningInfo = () => (
   <Aux>
     <NavBar />
     <LocationsWithMaps />
@@ -16,4 +16,4 @@ const joinNow = () => (
   </Aux>
 );
 
-export default joinNow;
+export default joiningInfo;

@@ -19,12 +19,11 @@ class meetCoaches extends Component {
     const nextbtn = document.querySelector('#nextbtn');
 
     //counter
-    let counter = 1;
+    let counter = Math.floor(Math.random() * 6) + 1;
 
     // calculate size
     let size;
-
-    window.onload = function (event) {
+    carouselImages[0].onload = () => {
       size = carouselImages[0].clientWidth;
       carouselSlide.style.transform = 'translateX(' + -size * counter + 'px)';
     };
@@ -66,11 +65,13 @@ class meetCoaches extends Component {
   }
   render() {
     return (
-      <section id='coaches' className='black-bg'>
-        <h2 className='l-heading-2 py-3 center-txt' data-aos='fade-up'>
-          Meet Our World Class
-          <span className='primary-text-dark'> Coaches</span>
-        </h2>
+      <section id='coaches' className='black-bg '>
+        <div className='container'>
+          <h2 className='l-heading-2 py-3 center-txt' data-aos='fade-up'>
+            Meet Our World Class
+            <span className='primary-text-dark'> Coaches</span>
+          </h2>
+        </div>
 
         <div className='arrows'>
           <i className='fas fa-arrow-left' id='prevbtn'></i>

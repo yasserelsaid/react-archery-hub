@@ -29,9 +29,9 @@ class Showcase extends Component {
               </span>
             </h1>
 
-            <Link to='/join' className='btn'>
+            <Link to='/book' className='btn'>
               {' '}
-              JOIN NOW{' '}
+              BOOK NOW{' '}
             </Link>
           </div>
         </div>

@@ -1,0 +1,9 @@
+.Error{
+  border: 1px solid;
+  margin: 10px 0px;
+  padding: 15px;
+  text-align: center;
+  border-radius: 5px;
+  color: #D8000C;
+  background-color: #FFBABA;
+}

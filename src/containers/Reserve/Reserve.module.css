@@ -1,0 +1,11 @@
+.Output {
+  width: 100%;
+  min-height: 80vh;
+  margin: auto;
+  padding: 70px 20px;
+
+  /* border: 1px solid #ccc; */
+  box-sizing: border-box;
+  background: var(--light-color);
+  color: #333;
+}
