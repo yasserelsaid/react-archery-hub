@@ -25,6 +25,9 @@
 }
 
 @media screen and (max-width: 768px) {
+  .AboutInfo h1 {
+    text-align: center;
+  }
   .InfoContent {
     display: block;
   }

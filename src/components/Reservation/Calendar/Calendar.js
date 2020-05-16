@@ -11,6 +11,7 @@ class Calendar extends Component {
     showError: false,
     calendar: {},
   };
+  _isMounted = false;
   selectedTimeslot = null;
   displayedLocation = null;
   selectTimeslotHandler = (allTimeslots, lastSelectedTimeslot) => {
@@ -24,11 +25,19 @@ class Calendar extends Component {
     } else {
       this.setState({ showError: true });
       setTimeout(() => {
-        this.setState({ showError: false });
+        if (this._isMounted) {
+          this.setState({ showError: false });
+        }
       }, 3000);
     }
   };
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   componentDidMount() {
+    this._isMounted = true;
     if (this.props.location === 'west') {
       this.displayedLocation = 'ALSSON-NEW GIZA';
       const west = {

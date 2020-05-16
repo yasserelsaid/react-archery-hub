@@ -4,10 +4,6 @@
   color: #333;
 }
 
-.FAQs h2 {
-  text-align: center;
-}
-
 .MoreQuestions {
   color: var(--primary-color);
   font-weight: 600;
@@ -15,4 +11,9 @@
 }
 .Answer a:hover {
   color: #b16416;
+}
+@media screen and (max-width: 768px) {
+  .FAQs h2 {
+    text-align: center;
+  }
 }
