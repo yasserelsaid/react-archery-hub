@@ -1,6 +1,7 @@
 .Calendar {
   margin-bottom: 1rem;
 }
+
 .AnotherLocBtn {
   display: inline-block;
   border: none;
@@ -13,10 +14,23 @@
   border: 1px solid var(--primary-color);
   margin-right: 0.5rem;
   transition: all 0.2s ease-in-out;
-  margin-bottom: 0.5em;
   background: var(--light-color);
 }
 .AnotherLocBtn:hover {
   background: #97510b;
   color: var(--light-color);
+}
+
+@media screen and (max-width: 768px) {
+  .Buttons {
+    display: flex;
+    flex-direction: column;
+  }
+  .AnotherLocBtn {
+    flex: 1;
+
+    width: 100%;
+    margin-right: 0rem;
+    margin-bottom: 0.5em;
+  }
 }

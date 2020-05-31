@@ -87,16 +87,18 @@ class Calendar extends Component {
                 onSelectTimeslot={this.selectTimeslotHandler}
               />
             </div>
-            {error}
-            <button
-              className={classes.AnotherLocBtn}
-              onClick={this.props.changeLocation}
-            >
-              Choose another location
-            </button>
-            <Button click={() => this.reserveHandler(this.selectedTimeslot)}>
-              Book time slot
-            </Button>
+            <div className={classes.Buttons}>
+              {error}
+              <button
+                className={classes.AnotherLocBtn}
+                onClick={this.props.changeLocation}
+              >
+                Choose another location
+              </button>
+              <Button click={() => this.reserveHandler(this.selectedTimeslot)}>
+                Book time slot
+              </Button>
+            </div>
           </Aux>
         )}
       </div>

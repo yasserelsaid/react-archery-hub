@@ -20,3 +20,8 @@
     text-align: center;
   }
 }
+@media screen and (max-width: 374px) {
+  .NavigationItem a {
+    padding: 0.6rem 0.4rem;
+  }
+}
