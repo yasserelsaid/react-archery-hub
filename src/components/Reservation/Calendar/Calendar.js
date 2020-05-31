@@ -7,6 +7,7 @@ import Error from "../../UI/Error/Error";
 import Button from "../../UI/Button/Button";
 import classes from "./Calendar.module.css";
 import Spinner from "../../UI/Spinner/Spinner";
+import ReservationMessage from "../ReservationMessage/ReservationMessage";
 
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
@@ -15,6 +16,7 @@ class Calendar extends Component {
     showError: false,
     calendar: {},
     loading: true,
+    networkError: false,
   };
   _isMounted = false;
   selectedTimeslot = null;
@@ -40,12 +42,10 @@ class Calendar extends Component {
     axios
       .get(`/reservations/${this.props.location}`)
       .then((res) => {
-        console.log(res.data);
-
         this.setState({ calendar: res.data, loading: false });
       })
       .catch((err) => {
-        this.setState({ error: true });
+        this.setState({ networkError: true, loading: false });
       });
   }
 
@@ -68,41 +68,50 @@ class Calendar extends Component {
       error = <Error message="Please Select a Time Slot" />;
     }
 
-    return (
-      <div className="container">
-        <h1 className="l-heading-2 center-txt py-1">
-          <span className="primary-text-dark">Choose</span> Date & Time
-        </h1>
-        {this.state.loading ? (
-          <Spinner />
-        ) : (
-          <Aux>
-            <p className="center-txt">{this.displayedLocation}</p>
-            <div className={classes.Calendar}>
-              <ReactTimeslotCalendar
-                initialDate={moment().format()}
-                timeslots={this.state.calendar.timeslots}
-                disabledTimeslots={this.state.calendar.disabledTimeslots}
-                renderDays={this.state.calendar.ignoreDays}
-                onSelectTimeslot={this.selectTimeslotHandler}
-              />
-            </div>
-            <div className={classes.Buttons}>
-              {error}
-              <button
-                className={classes.AnotherLocBtn}
-                onClick={this.props.changeLocation}
-              >
-                Choose another location
-              </button>
-              <Button click={() => this.reserveHandler(this.selectedTimeslot)}>
-                Book time slot
-              </Button>
-            </div>
-          </Aux>
-        )}
-      </div>
-    );
+    let output = null;
+    if (this.state.loading) {
+      output = <Spinner />;
+    } else if (this.state.networkError) {
+      output = (
+        <ReservationMessage
+          error
+          heading="Network Error"
+          text1="Something went wrong, please try again later."
+        />
+      );
+    } else {
+      output = (
+        <Aux>
+          <h1 className="l-heading-2 center-txt py-1">
+            <span className="primary-text-dark">Choose</span> Date & Time
+          </h1>
+          <p className="center-txt">{this.displayedLocation}</p>
+          <div className={classes.Calendar}>
+            <ReactTimeslotCalendar
+              initialDate={moment().format()}
+              timeslots={this.state.calendar.timeslots}
+              disabledTimeslots={this.state.calendar.disabledTimeslots}
+              renderDays={this.state.calendar.ignoreDays}
+              onSelectTimeslot={this.selectTimeslotHandler}
+            />
+          </div>
+          <div className={classes.Buttons}>
+            {error}
+            <button
+              className={classes.AnotherLocBtn}
+              onClick={this.props.changeLocation}
+            >
+              Choose Another Location
+            </button>
+            <Button click={() => this.reserveHandler(this.selectedTimeslot)}>
+              Book Time Slot
+            </Button>
+          </div>
+        </Aux>
+      );
+    }
+
+    return <div className="container">{output}</div>;
   }
 }
 export default Calendar;

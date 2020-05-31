@@ -15,6 +15,7 @@
   margin-right: 0.5rem;
   transition: all 0.2s ease-in-out;
   background: var(--light-color);
+  font-family: inherit;
 }
 .AnotherLocBtn:hover {
   background: #97510b;
@@ -28,7 +29,6 @@
   }
   .AnotherLocBtn {
     flex: 1;
-
     width: 100%;
     margin-right: 0rem;
     margin-bottom: 0.5em;

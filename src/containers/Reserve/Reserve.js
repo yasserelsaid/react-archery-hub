@@ -78,6 +78,7 @@ class Reserve extends Component {
     } else if (this.state.output === "reservationError") {
       output = (
         <ReservationMessage
+          error
           heading="Network Error"
           text1="Something went wrong, please try again later."
         />

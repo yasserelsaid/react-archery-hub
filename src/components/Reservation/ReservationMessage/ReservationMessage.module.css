@@ -1,4 +1,4 @@
-.Confirmed {
+.ReservationMessage {
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
   padding: 40px;
   border-radius: 10px;
@@ -7,6 +7,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.Error {
+  color: rgb(199, 0, 0);
+}
+.ReservationMessage h1 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+.ReservationMessage p {
+  font-size: 1.2rem;
 }
 .Btn {
   margin-top: 1rem;
