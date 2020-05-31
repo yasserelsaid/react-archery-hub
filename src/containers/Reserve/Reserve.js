@@ -1,55 +1,87 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import classes from './Reserve.module.css';
-import Aux from '../../hoc/Auxiliary/Auxiliary';
+import classes from "./Reserve.module.css";
+import Aux from "../../hoc/Auxiliary/Auxiliary";
 
-import NavBar from '../../components/NavBar/NavBar';
+import NavBar from "../../components/NavBar/NavBar";
 
-import UserInfoForm from '../../components/Reservation/UserInfoForm/UserInfoForm';
-import Locations from '../../components/Reservation/Locations/Locations';
-import Calendar from '../../components/Reservation/Calendar/Calendar';
-import Spinner from '../../components/UI/Spinner/Spinner';
-import ReservationConfirmed from '../../components/Reservation/ReservationConfirmed/ReservationConfirmed';
-import Footer from '../../components/Footer/Footer';
+import UserInfoForm from "../../components/Reservation/UserInfoForm/UserInfoForm";
+import Locations from "../../components/Reservation/Locations/Locations";
+import Calendar from "../../components/Reservation/Calendar/Calendar";
+import Spinner from "../../components/UI/Spinner/Spinner";
+import ReservationMessage from "../../components/Reservation/ReservationMessage/ReservationMessage";
+import Footer from "../../components/Footer/Footer";
+import Axios from "../../axios";
 
 class Reserve extends Component {
   state = {
-    output: 'inputInfoForm',
+    output: "inputInfoForm",
   };
   location = null;
+  clientInfo = null;
 
-  locationChosenHandler = loc => {
+  locationChosenHandler = (loc) => {
     this.location = loc;
-    this.setState({ output: 'chooseDate' });
+    this.setState({ output: "chooseDate" });
   };
-  chooseAnotherLocationHandler = () => {
-    this.setState({ output: 'chooseLocation' });
+  formSubmitHandler = (clientInfo) => {
+    this.clientInfo = clientInfo;
+    this.setState({ output: "chooseLocation" });
   };
-  reservationConfirmedHandler = () => {
-    this.setState({ output: 'loading' });
-    setTimeout(() => this.setState({ output: 'reservationConfirmed' }), 5000);
+  chooseLocation = () => {
+    this.setState({ output: "chooseLocation" });
+  };
+  reservationMessageHandler = (selectedTimeSlot) => {
+    this.setState({ output: "loading" });
+    console.log(this.clientInfo);
+
+    const data = {
+      ...this.clientInfo,
+      dateTime: selectedTimeSlot.startDate._d,
+    };
+    console.log(data);
+    console.log(this.location);
+    Axios.post(`/reserve/${this.location}`, data)
+      .then((res) => {
+        console.log(res);
+        this.setState({ output: "reservationMessage" });
+      })
+      .catch((err) => {
+        this.setState({ output: "reservationError" });
+      });
   };
 
   render() {
     let output;
-    if (this.state.output === 'inputInfoForm') {
-      output = (
-        <UserInfoForm showLocations={this.chooseAnotherLocationHandler} />
-      );
-    } else if (this.state.output === 'chooseLocation') {
+    if (this.state.output === "inputInfoForm") {
+      output = <UserInfoForm submitForm={this.formSubmitHandler} />;
+    } else if (this.state.output === "chooseLocation") {
       output = <Locations chosen={this.locationChosenHandler} />;
-    } else if (this.state.output === 'chooseDate') {
+    } else if (this.state.output === "chooseDate") {
       output = (
         <Calendar
           location={this.location}
-          changeLocation={this.chooseAnotherLocationHandler}
-          confirmReservation={this.reservationConfirmedHandler}
+          changeLocation={this.chooseLocation}
+          confirmReservation={this.reservationMessageHandler}
         />
       );
-    } else if (this.state.output === 'loading') {
+    } else if (this.state.output === "loading") {
       output = <Spinner />;
-    } else if (this.state.output === 'reservationConfirmed') {
-      output = <ReservationConfirmed />;
+    } else if (this.state.output === "reservationMessage") {
+      output = (
+        <ReservationMessage
+          heading="Thank you for making a reservation with us!"
+          text1="An email was sent to you to confirm your reservation and it is added to your Google calendar."
+          text2="We are looking forward to see you soon."
+        />
+      );
+    } else if (this.state.output === "reservationError") {
+      output = (
+        <ReservationMessage
+          heading="Network Error"
+          text1="Something went wrong, please try again later."
+        />
+      );
     }
 
     return (

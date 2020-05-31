@@ -1,10 +1,10 @@
-import React from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import React from "react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
-const MyMap = props => {
+const MyMap = (props) => {
   const { center, mapContainerStyle } = props;
   return (
-    <LoadScript googleMapsApiKey='AIzaSyCADoKMuCssFx5K4U_9MHNJQUvBzIjYVfU'>
+    <LoadScript googleMapsApiKey="AIzaSyAtey_cdbk2wVGzBAMJomVSD-8rRP-eoDA">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}

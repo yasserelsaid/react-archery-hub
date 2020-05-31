@@ -17,6 +17,10 @@
   background-color: var(--light-color);
 }
 
+.FormGroupAnimated input.Invalid {
+  background-color: rgb(255, 194, 194);
+}
+
 /* to make the background of the input field the same color as the bg when using chrome auto-fill */
 
 .FormGroupAnimated input:-webkit-autofill,
@@ -37,21 +41,21 @@
 }
 
 .LabelName::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -1px;
   height: 100%;
   width: 100%;
   border-bottom: #d48b2c 3px solid;
-  transform: translateX(-100%);
+  transform: translateX(-101%);
   transition: all 0.5s ease;
 }
 
 .LabelName .ContentName {
   position: absolute;
   bottom: 5px;
-  left: 0px;
+  left: 3px;
   transition: all 0.4s ease;
 }
 

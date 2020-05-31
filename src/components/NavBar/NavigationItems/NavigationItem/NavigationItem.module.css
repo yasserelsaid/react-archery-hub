@@ -15,7 +15,7 @@
 @media screen and (max-width: 768px) {
   .NavigationItem a {
     display: block;
-    padding: 0.3rem 0;
+    padding: 0.6rem;
     margin-bottom: 5px;
     text-align: center;
   }
