@@ -7,6 +7,7 @@ import FAQs from './containers/FAQs/FAQs';
 import Contact from './containers/Contact/Contact';
 import JoiningInfo from './containers/JoiningInfo/JoiningInfo';
 import Reserve from './containers/Reserve/Reserve';
+import AdminLogin from './containers/AdminLogin/AdminLogin';
 
 import './App.css';
 
@@ -20,6 +21,7 @@ function App(props) {
         <Route path='/contact' exact component={Contact} />
         <Route path='/info' exact component={JoiningInfo} />
         <Route path='/book' exact component={Reserve} />
+        <Route path='/admin-login' exact component={AdminLogin} />
       </Switch>
     </div>
   );

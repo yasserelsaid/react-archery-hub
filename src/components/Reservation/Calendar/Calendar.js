@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import moment from "moment";
-import ReactTimeslotCalendar from "react-timeslot-calendar";
+import React, { Component } from 'react';
+import moment from 'moment';
+import ReactTimeslotCalendar from 'react-timeslot-calendar';
 
-import axios from "../../../axios";
-import Error from "../../UI/Error/Error";
-import Button from "../../UI/Button/Button";
-import classes from "./Calendar.module.css";
-import Spinner from "../../UI/Spinner/Spinner";
-import ReservationMessage from "../ReservationMessage/ReservationMessage";
+import axios from '../../../axios';
+import Error from '../../UI/Error/Error';
+import Button from '../../UI/Button/Button';
+import classes from './Calendar.module.css';
+import Spinner from '../../UI/Spinner/Spinner';
+import ReservationMessage from '../ReservationMessage/ReservationMessage';
 
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import Aux from '../../../hoc/Auxiliary/Auxiliary';
 
 class Calendar extends Component {
   state = {
@@ -23,7 +23,6 @@ class Calendar extends Component {
   displayedLocation = null;
   selectTimeslotHandler = (allTimeslots, lastSelectedTimeslot) => {
     this.selectedTimeslot = allTimeslots[0];
-    console.log(this.selectedTimeslot);
   };
 
   componentWillUnmount() {
@@ -33,10 +32,10 @@ class Calendar extends Component {
   componentDidMount() {
     this._isMounted = true;
 
-    if (this.props.location === "west") {
-      this.displayedLocation = "ALSSON-NEW GIZA";
-    } else if (this.props.location === "east") {
-      this.displayedLocation = "SODIC EAST TOWN";
+    if (this.props.location === 'west') {
+      this.displayedLocation = 'ALSSON-NEW GIZA';
+    } else if (this.props.location === 'east') {
+      this.displayedLocation = 'SODIC EAST TOWN';
     }
 
     axios
@@ -65,7 +64,7 @@ class Calendar extends Component {
   render() {
     let error = null;
     if (this.state.showError) {
-      error = <Error message="Please Select a Time Slot" />;
+      error = <Error message='Please Select a Time Slot' />;
     }
 
     let output = null;
@@ -75,17 +74,17 @@ class Calendar extends Component {
       output = (
         <ReservationMessage
           error
-          heading="Network Error"
-          text1="Something went wrong, please try again later."
+          heading='Network Error'
+          text1='Something went wrong, please try again later.'
         />
       );
     } else {
       output = (
         <Aux>
-          <h1 className="l-heading-2 center-txt py-1">
-            <span className="primary-text-dark">Choose</span> Date & Time
+          <h1 className='l-heading-2 center-txt py-1'>
+            <span className='primary-text-dark'>Choose</span> Date & Time
           </h1>
-          <p className="center-txt">{this.displayedLocation}</p>
+          <p className='center-txt'>{this.displayedLocation}</p>
           <div className={classes.Calendar}>
             <ReactTimeslotCalendar
               initialDate={moment().format()}
@@ -111,7 +110,7 @@ class Calendar extends Component {
       );
     }
 
-    return <div className="container">{output}</div>;
+    return <div className='container'>{output}</div>;
   }
 }
 export default Calendar;

@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import classes from "./UserInfoForm.module.css";
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import classes from './UserInfoForm.module.css';
+import Aux from '../../../hoc/Auxiliary/Auxiliary';
 
-import FormGroupAnimated from "../../UI/FormGroupAnimated/FormGroupAnimated";
-import Button from "../../UI/Button/Button";
+import FormGroupAnimated from '../../UI/FormGroupAnimated/FormGroupAnimated';
+import Button from '../../UI/Button/Button';
 
 class userInfoForm extends Component {
   state = {
     form: {
       name: {
-        value: "",
+        value: '',
         validation: {
           required: true,
           // /^[a-z][a-z\s]*$/
@@ -19,7 +19,7 @@ class userInfoForm extends Component {
         valid: false,
       },
       email: {
-        value: "",
+        value: '',
         validation: {
           required: true,
           re: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -27,7 +27,7 @@ class userInfoForm extends Component {
         valid: false,
       },
       number: {
-        value: "",
+        value: '',
         validation: {
           required: true,
           // This is a re for Egyptian phone numbers
@@ -48,7 +48,7 @@ class userInfoForm extends Component {
     let isValid = true;
 
     if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
+      isValid = value.trim() !== '' && isValid;
     }
 
     if (rules.re) {
@@ -70,7 +70,6 @@ class userInfoForm extends Component {
     const updatedForm = { ...this.state.form };
     const updatedField = { ...updatedForm[e.target.id] };
     updatedField.value = e.target.value;
-    updatedField.touched = true;
     updatedField.valid = this.checkValidity(
       updatedField.value,
       updatedField.validation
@@ -86,7 +85,6 @@ class userInfoForm extends Component {
   };
 
   submitHandler = (e) => {
-    console.log("function called");
     if (this.state.formIsValid) {
       // this.setState({submitFailed: false})
       const clientInfo = {
@@ -96,11 +94,7 @@ class userInfoForm extends Component {
       };
       this.props.submitForm(clientInfo);
     } else {
-      console.log("form is invalid");
       this.setState({ submitFailed: true });
-      console.log("submit failed", this.state.form.name.valid);
-      console.log("submit failed", this.state.form.email.valid);
-      console.log("submit failed", this.state.form.number.valid);
     }
     e.preventDefault();
   };
@@ -109,30 +103,30 @@ class userInfoForm extends Component {
     return (
       <Aux>
         <section className={classes.UserInfoForm}>
-          <div className="container">
-            <h1 className="l-heading-2">
-              {" "}
-              <span className="primary-text-dark">Book</span> a Session
+          <div className='container'>
+            <h1 className='l-heading-2'>
+              {' '}
+              <span className='primary-text-dark'>Book</span> a Session
             </h1>
             <p>Please fill out the form below to book a session with us.</p>
 
-            <form onSubmit={this.submitHandler} action="">
+            <form onSubmit={this.submitHandler} action=''>
               <FormGroupAnimated
-                type="text"
-                name="name"
-                id="name"
-                for="name"
-                text="Name"
+                type='text'
+                name='name'
+                id='name'
+                for='name'
+                text='Name'
                 value={this.state.form.name.value}
                 changed={this.changedInputHandler}
                 invalid={!this.state.form.name.valid && this.state.submitFailed}
               />
               <FormGroupAnimated
-                type="email"
-                name="email"
-                id="email"
-                for="email"
-                text="Email"
+                type='email'
+                name='email'
+                id='email'
+                for='email'
+                text='Email'
                 value={this.state.form.email.value}
                 changed={this.changedInputHandler}
                 invalid={
@@ -140,11 +134,11 @@ class userInfoForm extends Component {
                 }
               />
               <FormGroupAnimated
-                type="tel"
-                name="number"
-                id="number"
-                for="number"
-                text="Phone Number"
+                type='tel'
+                name='number'
+                id='number'
+                for='number'
+                text='Phone Number'
                 value={this.state.form.number.value}
                 changed={this.changedInputHandler}
                 invalid={
@@ -154,8 +148,8 @@ class userInfoForm extends Component {
 
               <Button
                 // disabled={!this.state.formIsValid}
-                type="submit"
-                className="btn"
+                type='submit'
+                className='btn'
               >
                 Continue
               </Button>

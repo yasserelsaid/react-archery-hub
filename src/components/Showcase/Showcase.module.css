@@ -1,5 +1,5 @@
 .Showcase {
-  background: url("../../assets/images/jake.jpg") no-repeat center left/cover;
+  background: url('../../assets/images/jake.jpg') no-repeat center left/cover;
   margin-top: -76px;
   height: 100vh;
 }
@@ -23,6 +23,6 @@
 
 @media screen and (max-width: 768px) {
   .Showcase {
-    margin-top: -174px;
+    margin-top: -180px;
   }
 }

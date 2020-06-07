@@ -2,7 +2,7 @@ import React from 'react';
 import Membership from './Membership/Membership';
 import classes from './Memberships.module.css';
 
-const memberships = props => (
+const memberships = (props) => (
   <section className={classes.MembershipsFull}>
     <div className='container'>
       <h2 className='l-heading-2 center-txt primary-text-dark py-1'>
