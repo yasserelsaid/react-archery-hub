@@ -5,99 +5,46 @@ import Aux from '../../../hoc/Auxiliary/Auxiliary';
 
 import FormGroupAnimated from '../../UI/FormGroupAnimated/FormGroupAnimated';
 import Button from '../../UI/Button/Button';
+import * as actionTypes from '../../../store/actions';
+import { connect } from 'react-redux';
 
-class userInfoForm extends Component {
-  state = {
-    form: {
-      name: {
-        value: '',
-        validation: {
-          required: true,
-          // /^[a-z][a-z\s]*$/
-          re: /^[a-zA-Z\s]{2,40}$/,
-        },
-        valid: false,
-      },
-      email: {
-        value: '',
-        validation: {
-          required: true,
-          re: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        },
-        valid: false,
-      },
-      number: {
-        value: '',
-        validation: {
-          required: true,
-          // This is a re for Egyptian phone numbers
-          // re: /^01[0-2]{1}[0-9]{8}/,
-          // This is a re for Egyptian and international Phone Numbers
-          re: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/,
-          minLength: 10,
-          maxLength: 14,
-        },
-        valid: false,
-      },
-    },
-    formIsValid: false,
-    submitFailed: false,
-  };
+class UserInfoForm extends Component {
+  // state = {
 
-  checkValidity = (value, rules) => {
-    let isValid = true;
+  // };
 
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
+  // changedInputHandler = (e) => {
+  //   const updatedForm = { ...this.state.form };
+  //   const updatedField = { ...updatedForm[e.target.id] };
+  //   updatedField.value = e.target.value;
+  //   updatedField.valid = this.checkValidity(
+  //     updatedField.value,
+  //     updatedField.validation
+  //   );
+  //   updatedForm[e.target.id] = updatedField;
 
-    if (rules.re) {
-      isValid = rules.re.test(String(value).toLowerCase()) && isValid;
-    }
+  //   let formIsValid = true;
+  //   for (const field in updatedForm) {
+  //     formIsValid = updatedForm[field].valid && formIsValid;
+  //   }
 
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
+  //   this.setState({ form: updatedForm, formIsValid: formIsValid });
+  // };
 
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-
-    return isValid;
-  };
-
-  changedInputHandler = (e) => {
-    const updatedForm = { ...this.state.form };
-    const updatedField = { ...updatedForm[e.target.id] };
-    updatedField.value = e.target.value;
-    updatedField.valid = this.checkValidity(
-      updatedField.value,
-      updatedField.validation
-    );
-    updatedForm[e.target.id] = updatedField;
-
-    let formIsValid = true;
-    for (const field in updatedForm) {
-      formIsValid = updatedForm[field].valid && formIsValid;
-    }
-
-    this.setState({ form: updatedForm, formIsValid: formIsValid });
-  };
-
-  submitHandler = (e) => {
-    if (this.state.formIsValid) {
-      // this.setState({submitFailed: false})
-      const clientInfo = {
-        name: this.state.form.name.value,
-        email: this.state.form.email.value,
-        number: this.state.form.number.value,
-      };
-      this.props.submitForm(clientInfo);
-    } else {
-      this.setState({ submitFailed: true });
-    }
-    e.preventDefault();
-  };
+  // submitHandler = (e) => {
+  //   if (this.state.formIsValid) {
+  //     // this.setState({submitFailed: false})
+  //     const clientInfo = {
+  //       name: this.state.form.name.value,
+  //       email: this.state.form.email.value,
+  //       number: this.state.form.number.value,
+  //     };
+  //     this.props.submitForm(clientInfo);
+  //   } else {
+  //     this.setState({ submitFailed: true });
+  //   }
+  //   e.preventDefault();
+  // };
 
   render() {
     return (
@@ -110,16 +57,16 @@ class userInfoForm extends Component {
             </h1>
             <p>Please fill out the form below to book a session with us.</p>
 
-            <form onSubmit={this.submitHandler} action=''>
+            <form onSubmit={this.props.onFormSubmit} action=''>
               <FormGroupAnimated
                 type='text'
                 name='name'
                 id='name'
                 for='name'
                 text='Name'
-                value={this.state.form.name.value}
-                changed={this.changedInputHandler}
-                invalid={!this.state.form.name.valid && this.state.submitFailed}
+                value={this.props.form.name.value}
+                changed={this.props.onInputChange}
+                invalid={!this.props.form.name.valid && this.props.submitFailed}
               />
               <FormGroupAnimated
                 type='email'
@@ -127,10 +74,10 @@ class userInfoForm extends Component {
                 id='email'
                 for='email'
                 text='Email'
-                value={this.state.form.email.value}
-                changed={this.changedInputHandler}
+                value={this.props.form.email.value}
+                changed={this.props.onInputChange}
                 invalid={
-                  !this.state.form.email.valid && this.state.submitFailed
+                  !this.props.form.email.valid && this.props.submitFailed
                 }
               />
               <FormGroupAnimated
@@ -139,10 +86,25 @@ class userInfoForm extends Component {
                 id='number'
                 for='number'
                 text='Phone Number'
-                value={this.state.form.number.value}
-                changed={this.changedInputHandler}
+                value={this.props.form.number.value}
+                changed={this.props.onInputChange}
                 invalid={
-                  !this.state.form.number.valid && this.state.submitFailed
+                  !this.props.form.number.valid && this.props.submitFailed
+                }
+              />
+              <FormGroupAnimated
+                type='number'
+                name='numberOfPeople'
+                id='numberOfPeople'
+                for='numberOfPeople'
+                text='Number of People'
+                min='1'
+                max='5'
+                value={this.props.form.numberOfPeople.value}
+                changed={this.props.onInputChange}
+                invalid={
+                  !this.props.form.numberOfPeople.valid &&
+                  this.props.submitFailed
                 }
               />
 
@@ -161,4 +123,26 @@ class userInfoForm extends Component {
   }
 }
 
-export default userInfoForm;
+const mapStateToProps = (state) => {
+  return {
+    form: state.form,
+    formIsValid: state.formIsValid,
+    submitFailed: state.submitFailed,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onInputChange: (e) =>
+      dispatch({
+        type: actionTypes.INPUT_CHANGE,
+        fieldName: e.target.id,
+        value: e.target.value,
+      }),
+    onFormSubmit: (e) =>
+      dispatch({
+        type: actionTypes.SUBMIT_FORM,
+        event: e,
+      }),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(UserInfoForm);

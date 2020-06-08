@@ -8,8 +8,9 @@ import Button from '../../UI/Button/Button';
 import classes from './Calendar.module.css';
 import Spinner from '../../UI/Spinner/Spinner';
 import ReservationMessage from '../ReservationMessage/ReservationMessage';
-
+import { connect } from 'react-redux';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
+import * as actionTypes from '../../../store/actions';
 
 class Calendar extends Component {
   state = {
@@ -19,29 +20,31 @@ class Calendar extends Component {
     networkError: false,
   };
   _isMounted = false;
-  selectedTimeslot = null;
-  displayedLocation = null;
-  selectTimeslotHandler = (allTimeslots, lastSelectedTimeslot) => {
-    this.selectedTimeslot = allTimeslots[0];
-  };
+  // selectTimeslotHandler = (allTimeslots, lastSelectedTimeslot) => {
+  //   this.setState({ selectedTimeslot: allTimeslots[0] });
+  // };
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
   componentDidMount() {
+    console.log('cdm');
     this._isMounted = true;
-
+    let location;
     if (this.props.location === 'west') {
-      this.displayedLocation = 'ALSSON-NEW GIZA';
+      location = 'ALSSON-NEW GIZA';
     } else if (this.props.location === 'east') {
-      this.displayedLocation = 'SODIC EAST TOWN';
+      location = 'SODIC EAST TOWN';
     }
 
     axios
       .get(`/reservations/${this.props.location}`)
       .then((res) => {
-        this.setState({ calendar: res.data, loading: false });
+        this.setState({
+          calendar: res.data,
+          loading: false,
+        });
       })
       .catch((err) => {
         this.setState({ networkError: true, loading: false });
@@ -49,8 +52,8 @@ class Calendar extends Component {
   }
 
   reserveHandler = () => {
-    if (this.selectedTimeslot) {
-      this.props.confirmReservation(this.selectedTimeslot);
+    if (this.props.selectedTimeslot) {
+      this.props.onSubmitTimeslot();
     } else {
       this.setState({ showError: true });
       setTimeout(() => {
@@ -66,7 +69,12 @@ class Calendar extends Component {
     if (this.state.showError) {
       error = <Error message='Please Select a Time Slot' />;
     }
-
+    let locationName;
+    if (this.props.location === 'west') {
+      locationName = 'ALSSON NEW-GIZA';
+    } else if (this.props.location === 'east') {
+      locationName = 'SODIC EAST TOWN';
+    }
     let output = null;
     if (this.state.loading) {
       output = <Spinner />;
@@ -84,14 +92,14 @@ class Calendar extends Component {
           <h1 className='l-heading-2 center-txt py-1'>
             <span className='primary-text-dark'>Choose</span> Date & Time
           </h1>
-          <p className='center-txt'>{this.displayedLocation}</p>
+          <p className='center-txt'>{locationName}</p>
           <div className={classes.Calendar}>
             <ReactTimeslotCalendar
               initialDate={moment().format()}
               timeslots={this.state.calendar.timeslots}
               disabledTimeslots={this.state.calendar.disabledTimeslots}
               renderDays={this.state.calendar.ignoreDays}
-              onSelectTimeslot={this.selectTimeslotHandler}
+              onSelectTimeslot={this.props.onTimeslotSelected}
             />
           </div>
           <div className={classes.Buttons}>
@@ -102,7 +110,9 @@ class Calendar extends Component {
             >
               Choose Another Location
             </button>
-            <Button click={() => this.reserveHandler(this.selectedTimeslot)}>
+            <Button
+              click={() => this.reserveHandler(this.props.selectedTimeslot)}
+            >
               Book Time Slot
             </Button>
           </div>
@@ -113,4 +123,28 @@ class Calendar extends Component {
     return <div className='container'>{output}</div>;
   }
 }
-export default Calendar;
+
+const mapStateToProps = (state) => {
+  return {
+    location: state.location,
+    selectedTimeslot: state.selectedTimeslot,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTimeslotSelected: (allTimeslots, lastSelectedTimeslot) =>
+      dispatch({
+        type: actionTypes.SELECT_TIMESLOT,
+        timeslot: allTimeslots[0],
+      }),
+    changeLocation: () =>
+      dispatch({
+        type: actionTypes.CHANGE_LOCATION,
+      }),
+    onSubmitTimeslot: () =>
+      dispatch({ type: actionTypes.SHOW_CONFIRMATION_PROMPT }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar);

@@ -12,59 +12,86 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import ReservationMessage from '../../components/Reservation/ReservationMessage/ReservationMessage';
 import Footer from '../../components/Footer/Footer';
 import Axios from '../../axios';
-
+import * as actionTypes from '../../store/actions';
+import { connect } from 'react-redux';
+import moment from 'moment';
 class Reserve extends Component {
-  state = {
-    output: 'inputInfoForm',
-  };
-  location = null;
-  clientInfo = null;
+  // state = {
+  //   output: 'infoForm',
+  // };
+  // location = null;
+  // clientInfo = null;
 
-  locationChosenHandler = (loc) => {
-    this.location = loc;
-    this.setState({ output: 'chooseDate' });
-  };
-  formSubmitHandler = (clientInfo) => {
-    this.clientInfo = clientInfo;
-    this.setState({ output: 'chooseLocation' });
-  };
-  chooseLocation = () => {
-    this.setState({ output: 'chooseLocation' });
-  };
-  reservationMessageHandler = (selectedTimeSlot) => {
-    this.setState({ output: 'loading' });
+  // locationChosenHandler = (loc) => {
+  //   this.location = loc;
+  //   this.setState({ output: 'chooseDate' });
+  // };
+  // formSubmitHandler = (clientInfo) => {
+  //   this.clientInfo = clientInfo;
+  //   this.setState({ output: 'chooseLocation' });
+  // };
+  // chooseLocation = () => {
+  //   this.setState({ output: 'chooseLocation' });
+  // };
+  // reservationConfirmationMessageHandler = (selectedTimeSlot) => {
+  //   this.setState({ output: 'loading' });
 
-    const data = {
-      ...this.clientInfo,
-      dateTime: selectedTimeSlot.startDate._d,
-    };
+  //   const data = {
+  //     ...this.clientInfo,
+  //     dateTime: selectedTimeSlot.startDate._d,
+  //   };
 
-    Axios.post(`/reserve/${this.location}`, data)
-      .then((res) => {
-        this.setState({ output: 'reservationMessage' });
-      })
-      .catch((err) => {
-        this.setState({ output: 'reservationError' });
-      });
-  };
+  //   Axios.post(`/reserve/${this.location}`, data)
+  //     .then((res) => {
+  //       this.setState({ output: 'reservationConfirmationMessage' });
+  //     })
+  //     .catch((err) => {
+  //       this.setState({ output: 'reservationError' });
+  //     });
+  // };
+  componentDidMount() {
+    this.props.showForm();
+  }
 
   render() {
+    console.log(this.props.numberOfPeople);
+    let locationName;
+    if (this.props.location === 'west') {
+      locationName = 'ALSSON NEW-GIZA';
+    } else if (this.props.location === 'east') {
+      locationName = 'SODIC EAST TOWN';
+    }
+
     let output;
-    if (this.state.output === 'inputInfoForm') {
-      output = <UserInfoForm submitForm={this.formSubmitHandler} />;
-    } else if (this.state.output === 'chooseLocation') {
-      output = <Locations chosen={this.locationChosenHandler} />;
-    } else if (this.state.output === 'chooseDate') {
+    if (this.props.output === 'infoForm') {
+      output = <UserInfoForm />;
+    } else if (this.props.output === 'chooseLocation') {
+      output = <Locations />;
+    } else if (this.props.output === 'chooseDate') {
       output = (
         <Calendar
-          location={this.location}
-          changeLocation={this.chooseLocation}
-          confirmReservation={this.reservationMessageHandler}
+          confirmReservation={this.reservationConfirmationMessageHandler}
         />
       );
-    } else if (this.state.output === 'loading') {
+    } else if (this.props.output === 'confirmReservationPrompt') {
+      const people =
+        this.props.numberOfPeople.value > 1
+          ? `${this.props.numberOfPeople.value} people`
+          : `1 person`;
+      const date = moment(this.props.selectedTimeslot.startDate).format(
+        'dddd MMMM Do YYYY'
+      );
+      const confirmationPromptMessage = `Are you sure you want to make a reservation for ${people} in ${locationName} on ${date}?`;
+      output = (
+        <ReservationMessage
+          continueButton
+          continueClicked={this.props.showConfirmation}
+          text1={confirmationPromptMessage}
+        />
+      );
+    } else if (this.props.output === 'loading') {
       output = <Spinner />;
-    } else if (this.state.output === 'reservationMessage') {
+    } else if (this.props.output === 'reservationConfirmationMessage') {
       output = (
         <ReservationMessage
           heading='Thank you for making a reservation with us!'
@@ -72,7 +99,7 @@ class Reserve extends Component {
           text2='We are looking forward to see you soon.'
         />
       );
-    } else if (this.state.output === 'reservationError') {
+    } else if (this.props.output === 'reservationError') {
       output = (
         <ReservationMessage
           error
@@ -91,4 +118,19 @@ class Reserve extends Component {
     );
   }
 }
-export default Reserve;
+
+const mapStateToProps = (state) => {
+  return {
+    output: state.output,
+    location: state.location,
+    selectedTimeslot: state.selectedTimeslot,
+    numberOfPeople: state.form.numberOfPeople,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showForm: () => dispatch({ type: actionTypes.SHOW_FORM }),
+    showConfirmation: () => dispatch({ type: actionTypes.SHOW_CONFIRMATION }),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Reserve);

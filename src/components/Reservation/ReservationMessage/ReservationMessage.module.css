@@ -18,20 +18,25 @@
 .ReservationMessage p {
   font-size: 1.2rem;
 }
+.Buttons {
+  display: flex;
+}
 .Btn {
-  margin-top: 1rem;
   display: inline-block;
-  cursor: pointer;
   border: none;
-  background: var(--primary-color);
+  cursor: pointer;
   border-radius: 10px;
-  color: var(--light-color);
+  color: var(--primary-color);
   padding: 0.75rem 2rem;
   text-align: center;
   font-size: 1.1rem;
+  border: 1px solid var(--primary-color);
+  margin-right: 0.5rem;
   transition: all 0.2s ease-in-out;
-  color: #fff;
+  background: var(--light-color);
+  font-family: inherit;
 }
 .Btn:hover {
   background: #97510b;
+  color: var(--light-color);
 }
