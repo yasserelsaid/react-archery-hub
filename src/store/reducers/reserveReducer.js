@@ -74,10 +74,9 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SHOW_FORM:
+    case actionTypes.INITIAL_STATE:
       return {
-        ...state,
-        output: 'infoForm',
+        ...initialState,
       };
     case actionTypes.INPUT_CHANGE:
       const updatedForm = { ...state.form };

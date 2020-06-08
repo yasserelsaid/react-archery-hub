@@ -50,7 +50,7 @@ class Reserve extends Component {
   //     });
   // };
   componentDidMount() {
-    this.props.showForm();
+    this.props.initialState();
   }
 
   render() {
@@ -129,7 +129,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    showForm: () => dispatch({ type: actionTypes.SHOW_FORM }),
+    initialState: () => dispatch({ type: actionTypes.INITIAL_STATE }),
     showConfirmation: () => dispatch({ type: actionTypes.SHOW_CONFIRMATION }),
   };
 };
