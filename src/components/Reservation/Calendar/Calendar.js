@@ -20,6 +20,10 @@ class Calendar extends Component {
     networkError: false,
   };
   _isMounted = false;
+  timeslotProps = {
+    format: 'hh:mm ', // Each element in the timeslot array is an Hour
+    showFormat: 'h:mm A', // They will be displayed as Hour:Minutes AM/PM
+  };
   // selectTimeslotHandler = (allTimeslots, lastSelectedTimeslot) => {
   //   this.setState({ selectedTimeslot: allTimeslots[0] });
   // };
@@ -29,17 +33,15 @@ class Calendar extends Component {
   }
 
   componentDidMount() {
-    console.log('cdm');
     this._isMounted = true;
-    let location;
-    if (this.props.location === 'west') {
-      location = 'ALSSON-NEW GIZA';
-    } else if (this.props.location === 'east') {
-      location = 'SODIC EAST TOWN';
-    }
 
+    // const data = {
+    //   numberOfPeople: parseInt(this.props.numberOfPeople),
+    // };
     axios
-      .get(`/reservations/${this.props.location}`)
+      .get(
+        `/reservations/${this.props.location}?numberOfPeople=${this.props.numberOfPeople}`
+      )
       .then((res) => {
         this.setState({
           calendar: res.data,
@@ -47,6 +49,7 @@ class Calendar extends Component {
         });
       })
       .catch((err) => {
+        console.log(err);
         this.setState({ networkError: true, loading: false });
       });
   }
@@ -65,6 +68,8 @@ class Calendar extends Component {
   };
 
   render() {
+
+
     let error = null;
     if (this.state.showError) {
       error = <Error message='Please Select a Time Slot' />;
@@ -100,6 +105,7 @@ class Calendar extends Component {
               disabledTimeslots={this.state.calendar.disabledTimeslots}
               renderDays={this.state.calendar.ignoreDays}
               onSelectTimeslot={this.props.onTimeslotSelected}
+              timeslotProps={this.timeslotProps}
             />
           </div>
           <div className={classes.Buttons}>
@@ -126,8 +132,9 @@ class Calendar extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    location: state.location,
-    selectedTimeslot: state.selectedTimeslot,
+    location: state.reserve.location,
+    selectedTimeslot: state.reserve.selectedTimeslot,
+    numberOfPeople: state.reserve.form.numberOfPeople.value,
   };
 };
 

@@ -98,8 +98,8 @@ class UserInfoForm extends Component {
                 id='numberOfPeople'
                 for='numberOfPeople'
                 text='Number of People'
-                min='1'
-                max='5'
+                min={this.props.form.numberOfPeople.validation.min}
+                max={this.props.form.numberOfPeople.validation.max}
                 value={this.props.form.numberOfPeople.value}
                 changed={this.props.onInputChange}
                 invalid={
@@ -125,9 +125,9 @@ class UserInfoForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    form: state.form,
-    formIsValid: state.formIsValid,
-    submitFailed: state.submitFailed,
+    form: state.reserve.form,
+    formIsValid: state.reserve.formIsValid,
+    submitFailed: state.reserve.submitFailed,
   };
 };
 const mapDispatchToProps = (dispatch) => {

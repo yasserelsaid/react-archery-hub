@@ -34,7 +34,7 @@ class Locations extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    location: state.location,
+    location: state.reserve.location,
   };
 };
 const mapDispatchToProps = (dispatch) => {

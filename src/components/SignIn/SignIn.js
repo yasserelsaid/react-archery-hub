@@ -3,17 +3,18 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
+import Error from '../UI/Error/Error';
 
 const theme = createMuiTheme({
   palette: {
@@ -54,6 +55,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn(props) {
   const classes = useStyles();
+  let spinner;
+  if (props.loading) {
+    spinner = <CircularProgress />;
+  } else {
+    spinner = <Box mt={5.6}></Box>;
+  }
+  let error;
+  if (props.error && props.showError) {
+    error = props.error.response ? (
+      <Error message='Invalid Credentials' />
+    ) : (
+      <Error message='Oops! Something Went Wrong' />
+    );
+  } else {
+    error = <Box mt={5}></Box>;
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -67,6 +84,7 @@ export default function SignIn(props) {
             Sign in
           </Typography>
           <form className={classes.form} noValidate onSubmit={props.submitted}>
+            {error}
             <TextField
               variant='outlined'
               margin='normal'
@@ -93,10 +111,12 @@ export default function SignIn(props) {
               onChange={props.changed}
               error={props.passwordIsValid}
             />
+            {/* 
             <FormControlLabel
               control={<Checkbox value='remember' color='primary' />}
               label='Remember me'
-            />
+            /> */}
+
             <Button
               type='submit'
               fullWidth
@@ -106,21 +126,26 @@ export default function SignIn(props) {
             >
               Sign In
             </Button>
+
             <Grid container>
               <Grid item xs>
                 <Link href='#' variant='body2'>
                   Forgot password?
                 </Link>
               </Grid>
-              <Grid item>
-                <Link href='#' variant='body2'>
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
+
+              {
+                <Grid item s>
+                  {spinner}
+                  {/* <Link href='#' variant='body2'>
+                    {"Don't have an account? Sign Up"}
+                  </Link> */}
+                </Grid>
+              }
             </Grid>
           </form>
         </div>
-        <Box mt={13}>{/* <Copyright /> */}</Box>
+        <Box mt={20}>{/* <Copyright /> */}</Box>
       </Container>
     </ThemeProvider>
   );

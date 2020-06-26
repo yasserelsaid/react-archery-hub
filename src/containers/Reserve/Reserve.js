@@ -33,28 +33,32 @@ class Reserve extends Component {
   // chooseLocation = () => {
   //   this.setState({ output: 'chooseLocation' });
   // };
-  // reservationConfirmationMessageHandler = (selectedTimeSlot) => {
-  //   this.setState({ output: 'loading' });
 
-  //   const data = {
-  //     ...this.clientInfo,
-  //     dateTime: selectedTimeSlot.startDate._d,
-  //   };
-
-  //   Axios.post(`/reserve/${this.location}`, data)
-  //     .then((res) => {
-  //       this.setState({ output: 'reservationConfirmationMessage' });
-  //     })
-  //     .catch((err) => {
-  //       this.setState({ output: 'reservationError' });
-  //     });
-  // };
   componentDidMount() {
     this.props.initialState();
   }
+  makeReservation = () => {
+    this.props.showSpinner();
+    const data = {
+      name: this.props.name,
+      email: this.props.email,
+      number: this.props.number,
+      numberOfPeople: parseInt(this.props.numberOfPeople),
+      time: this.props.selectedTimeslot.startDate._d,
+    };
 
+    Axios.post(`/reservation/${this.props.location}`, data)
+      .then((res) => {
+        // this.setState({ output: 'reservationConfirmationMessage' });
+        this.props.reservationConfirmed();
+      })
+      .catch((err) => {
+   
+        this.props.showError();
+        console.log(err);
+      });
+  };
   render() {
-    console.log(this.props.numberOfPeople);
     let locationName;
     if (this.props.location === 'west') {
       locationName = 'ALSSON NEW-GIZA';
@@ -75,17 +79,17 @@ class Reserve extends Component {
       );
     } else if (this.props.output === 'confirmReservationPrompt') {
       const people =
-        this.props.numberOfPeople.value > 1
-          ? `${this.props.numberOfPeople.value} people`
+        this.props.numberOfPeople > 1
+          ? `${this.props.numberOfPeople} people`
           : `1 person`;
       const date = moment(this.props.selectedTimeslot.startDate).format(
-        'dddd MMMM Do YYYY'
+        'dddd MMMM Do YYYY [at] h:mm a'
       );
       const confirmationPromptMessage = `Are you sure you want to make a reservation for ${people} in ${locationName} on ${date}?`;
       output = (
         <ReservationMessage
           continueButton
-          continueClicked={this.props.showConfirmation}
+          continueClicked={this.makeReservation}
           text1={confirmationPromptMessage}
         />
       );
@@ -103,7 +107,7 @@ class Reserve extends Component {
       output = (
         <ReservationMessage
           error
-          heading='Network Error'
+          heading='Oops!'
           text1='Something went wrong, please try again later.'
         />
       );
@@ -121,16 +125,23 @@ class Reserve extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    output: state.output,
-    location: state.location,
-    selectedTimeslot: state.selectedTimeslot,
-    numberOfPeople: state.form.numberOfPeople,
+    output: state.reserve.output,
+    location: state.reserve.location,
+    selectedTimeslot: state.reserve.selectedTimeslot,
+    numberOfPeople: state.reserve.form.numberOfPeople.value,
+    name: state.reserve.form.name.value,
+    email: state.reserve.form.email.value,
+    number: state.reserve.form.number.value,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     initialState: () => dispatch({ type: actionTypes.INITIAL_STATE }),
-    showConfirmation: () => dispatch({ type: actionTypes.SHOW_CONFIRMATION }),
+    // showConfirmation: () => dispatch({ type: actionTypes.SHOW_CONFIRMATION }),
+    showSpinner: () => dispatch({ type: actionTypes.SHOW_SPINNER }),
+    reservationConfirmed: () =>
+      dispatch({ type: actionTypes.SHOW_CONFIRMATION }),
+    showError: () => dispatch({ type: actionTypes.SHOW_ERROR }),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Reserve);

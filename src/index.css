@@ -109,6 +109,9 @@ p {
 .py-1 {
   padding: 1.5rem 0;
 }
+.py-1c {
+  padding: 1.5rem 0.64rem;
+}
 .py-2 {
   padding: 2rem 0;
 }

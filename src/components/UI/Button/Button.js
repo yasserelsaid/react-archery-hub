@@ -1,5 +1,5 @@
-import React from "react";
-import classes from "./Button.module.css";
+import React from 'react';
+import classes from './Button.module.css';
 // import classes from './Button.module.css';
 
 const button = (props) => (
@@ -8,6 +8,7 @@ const button = (props) => (
     className={classes.Button}
     type={props.type}
     onClick={props.click}
+    style={props.style}
   >
     {props.children}
   </button>

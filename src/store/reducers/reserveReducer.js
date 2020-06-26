@@ -41,7 +41,7 @@ const initialState = {
       value: '',
       validation: {
         required: true,
-        re: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        re: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       },
       valid: false,
     },
@@ -52,7 +52,7 @@ const initialState = {
         // This is a re for Egyptian phone numbers
         // re: /^01[0-2]{1}[0-9]{8}/,
         // This is a re for Egyptian and international Phone Numbers
-        re: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/,
+        re: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/,
         minLength: 10,
         maxLength: 14,
       },
@@ -63,7 +63,7 @@ const initialState = {
       validation: {
         required: true,
         min: 1,
-        max: 5,
+        max: 30,
       },
       valid: false,
     },
@@ -91,7 +91,6 @@ const reducer = (state = initialState, action) => {
       for (const field in updatedForm) {
         formIsValid = updatedForm[field].valid && formIsValid;
       }
-      console.log(updatedField.value);
       return {
         ...state,
         form: updatedForm,
@@ -132,10 +131,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         output: 'confirmReservationPrompt',
       };
+    case actionTypes.SHOW_SPINNER:
+      return {
+        ...state,
+        output: 'loading',
+      };
     case actionTypes.SHOW_CONFIRMATION:
       return {
         ...state,
         output: 'reservationConfirmationMessage',
+      };
+    case actionTypes.SHOW_ERROR:
+      return {
+        ...state,
+        output: 'reservationError',
       };
 
     default:

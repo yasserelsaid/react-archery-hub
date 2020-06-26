@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: "https://shahda-archery-hub.herokuapp.com",
+  baseURL: 'https://archery-hub.web.app',
 });
 
 // instance.defaults.headers.common["Authorization"] = "Auth Token From instance";
