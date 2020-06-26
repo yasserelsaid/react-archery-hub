@@ -1,5 +1,14 @@
 {
   "projects": {
-    "default": "archeryhub"
+    "default": "archery-hub"
+  },
+  "targets": {
+    "archery-hub": {
+      "hosting": {
+        "fe": [
+          "archeryhub"
+        ]
+      }
+    }
   }
 }
