@@ -40,7 +40,7 @@ class Calendar extends Component {
     // };
     axios
       .get(
-        `/reservations/${this.props.location}?numberOfPeople=${this.props.numberOfPeople}`
+        `/reservations/${this.props.location}?numberOfPeople=${this.props.numberOfPeople}/`
       )
       .then((res) => {
         this.setState({
