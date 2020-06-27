@@ -101,6 +101,8 @@ const reducer = (state = initialState, action) => {
       if (state.formIsValid) {
         return {
           ...state,
+          selectedTimeslot: null,
+          location: null,
           output: 'chooseLocation',
         };
       } else {
@@ -112,12 +114,15 @@ const reducer = (state = initialState, action) => {
     case actionTypes.CHANGE_LOCATION:
       return {
         ...state,
+        selectedTimeslot: null,
+        location: null,
         output: 'chooseLocation',
       };
 
     case actionTypes.SUBMIT_LOCATION:
       return {
         ...state,
+        selectedTimeslot: null,
         location: action.location,
         output: 'chooseDate',
       };
