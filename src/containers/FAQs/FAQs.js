@@ -22,37 +22,31 @@ const faqs = props => (
 
         <QA
           question='How many times do I have to train per week?'
-          answer='Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit, cupiditate excepturi fugiat quas facilis totam dolor in illum maiores voluptate!'
+          answer='Most people who train in Archery Hub train 3 to 4 times a week but you can train as much as 7 times a week.'
         />
 
         <QA
           question='Is there a group discount?'
-          answer='Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit, cupiditate excepturi fugiat quas facilis totam dolor in illum maiores voluptate!'
+          answer='Yes! we offer discounts for groups that consist of more than 3 people, contact us to know more.'
         />
 
         <QA
           question='How many locations can I train in?'
-          answer='     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit, cupiditate excepturi fugiat quas facilis totam dolor in illum maiores voluptate!'
+          answer='You can train in both Archery Hub locations East Town and West Town without any extra fees.'
         />
-        <QA
-          question='What can I expect?'
-          answer='     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit, cupiditate excepturi fugiat quas facilis totam dolor in illum maiores voluptate!'
-        />
+
         <QA
           question='How much do you charge per session?'
-          answer='     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit, cupiditate excepturi fugiat quas facilis totam dolor in illum maiores voluptate!'
+          answer='We charge 200 EGP per session, for monthly and yearly prices visit the Joining Info page. '
         />
         <QA
           question='Do I have to commit to the training?'
-          answer='     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit, cupiditate excepturi fugiat quas facilis totam dolor in illum maiores voluptate!'
+          answer='In order to get the best results, you ideally would need to commit to training more than 5 times per week, however, it is entirely up to you how many times you train.'
         />
+
         <QA
-          question='Can I train at two or more locations?'
-          answer='         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit, cupiditate excepturi fugiat quas facilis totam dolor in illum maiores voluptate! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum nemo officiis excepturi inventore neque quae nam rem reprehenderit asperiores, debitis ab quidem omnis at totam.'
-        />
-        <QA
-          question='How many times do I have to train per week?'
-          answer='     Lorem, ipsum dolor sit amet consectetur lorem adipisicing elit. Odit, cupiditate excepturi fugiat quas facilis totam dolor in illum maiores voluptate!'
+          question='Do you offer physical training to compliment archery practice?'
+          answer='Yes! in fact, we partnered up with engine360 to deliver physical training two times a week that is designed specifically to make you better at archery.'
         />
 
         <p className={classes.MoreQuestions}>Still Have a Question?</p>

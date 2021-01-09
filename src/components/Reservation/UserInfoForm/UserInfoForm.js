@@ -123,22 +123,22 @@ class UserInfoForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     form: state.reserve.form,
     formIsValid: state.reserve.formIsValid,
     submitFailed: state.reserve.submitFailed,
   };
 };
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onInputChange: (e) =>
+    onInputChange: e =>
       dispatch({
         type: actionTypes.INPUT_CHANGE,
         fieldName: e.target.id,
         value: e.target.value,
       }),
-    onFormSubmit: (e) =>
+    onFormSubmit: e =>
       dispatch({
         type: actionTypes.SUBMIT_FORM,
         event: e,

@@ -21,7 +21,7 @@ const contact = (props) => (
         </h1>
         <p>Please fill out the form below to contact us.</p>
 
-        <form action="">
+        <form action="https://formspree.io/mnqgbzjy" method="POST" >
           <FormGroupAnimated
             type="text"
             name="name"
